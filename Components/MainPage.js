@@ -20,8 +20,6 @@ import Ranking from './Ranking';
 
 import DailyChallenge from './DailyChallenge';
 import MainChallengePage from './MainChallengePage'
-import Home from './Home'
-import { HomeLoaded } from '../App'
 
 const Drawer = createDrawerNavigator();
 
