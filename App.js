@@ -15,7 +15,7 @@ function LogoTitle0() {
   return (
     <Image
       style={styles.navigatorImage}
-      source={require('../covidSee10ChallengeFront/landingPageBackground.jpg')}
+      source={require('../covidSee10Challenge/landingPageBackground.jpg')}
     />
   );
 }
@@ -24,7 +24,7 @@ function LogoTitle() {
   return (
     <Image
       style={styles.navigatorImage}
-      source={require('../covidSee10ChallengeFront/background.jpg')}
+      source={require('../covidSee10Challenge/background.jpg')}
     />
   );
 }
@@ -33,7 +33,7 @@ function LogoTitle2() {
   return (
     <Image
       style={styles.navigatorImage}
-      source={require('../covidSee10ChallengeFront/mainPageBackground.jpg')}
+      source={require('../covidSee10Challenge/mainPageBackground.jpg')}
     />
   );
 }
