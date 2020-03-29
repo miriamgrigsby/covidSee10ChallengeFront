@@ -189,19 +189,20 @@ const styles = StyleSheet.create({
     headerDiv: {
         flex: 1,
         flexDirection: "row",
-        // alignItems: "center", 
         width: "100%",
-        maxHeight: "10%",
+        maxHeight: "15%",
         backgroundColor: "white",
         justifyContent: "space-between",
         padding: "1%",
+        marginTop: "5%"
     },
     bottomDiv: {
         width: "100%",
         height: "90%",
         flex: 1,
         flexDirection: "row",
-        backgroundColor: "white"
+        backgroundColor: "white",
+        marginTop: '-5%'
     },
     headerText: {
         width: "65%",
@@ -213,7 +214,8 @@ const styles = StyleSheet.create({
         width: "100%",
     },
     backButton: {
-        minWidth: "16%",
+        minWidth: "20%",
+        height: "100%",
     },
     headerTextStyle2: {
         fontSize: 20,

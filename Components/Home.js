@@ -4,7 +4,6 @@ import { TextInput, TouchableOpacity } from 'react-native-gesture-handler';
 import axios from 'axios'
 
 import { useForm } from "react-hook-form";
-import { disableExpoCliLogging } from 'expo/build/logs/Logs';
 
 const Home = (props) => {
 

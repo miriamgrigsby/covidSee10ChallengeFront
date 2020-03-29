@@ -44,12 +44,12 @@ export default class App extends Component {
   render() {
     return (
       <NavigationContainer>
-        <Stack.Navigator>
-        <Stack.Screen
+        <Stack.Navigator headerMode="none">
+        {/* <Stack.Screen
             name="Main Page"
             component={MainPage}
             options={{ headerLeft: null }, { headerRight: props => <LogoTitle2 {...props} /> }}
-          />
+          /> */}
         
           <Stack.Screen
             name="Landing"
@@ -62,11 +62,11 @@ export default class App extends Component {
             component={Home}
             options={{ headerLeft: null }, { headerRight: props => <LogoTitle {...props} /> }}
           />
-          {/* <Stack.Screen
+          <Stack.Screen
             name="Main Page"
             component={MainPage}
             options={{ headerLeft: null }, { headerRight: props => <LogoTitle2 {...props} /> }}
-          /> */}
+          />
           <Stack.Screen
             name="Sign Up"
             component={SignUp}

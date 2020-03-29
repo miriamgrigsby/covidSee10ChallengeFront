@@ -60,6 +60,7 @@ const styles = StyleSheet.create({
         width: "100%",
         maxHeight: "20%",
         padding: "1%",
+        marginTop: "15%"
     },
     headerText: {
         width: "70%",

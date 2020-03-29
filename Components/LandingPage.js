@@ -29,20 +29,20 @@ const styles = StyleSheet.create({
         justifyContent: "flex-end"
     },
     signUpButton: {
-        minHeight: "10%",
+        minHeight: "15%",
         minWidth: "55%",
         borderWidth: 1,
         flex: 1,
         backgroundColor: "black",
         marginBottom: "20%",
-        alignSelf: "center",
+        // alignSelf: "center",
         opacity: 0.8
     },
     signUpText: {
         textAlign: "center",
-        fontSize: 25,
+        fontSize: 40,
         color: "white",
-        marginTop: "3.5%", 
+        marginTop: "4%", 
         fontWeight: "bold"
     },
     background: {

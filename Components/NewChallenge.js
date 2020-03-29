@@ -71,11 +71,11 @@ const styles = StyleSheet.create({
         flex: 1,
         maxWidth: "100%",
         minHeight: "100%",
-        padding: ".75%",
+        // padding: ".75%",
         borderTopWidth: 4,
         backgroundColor: "black",
         opacity: 0.8,
-        marginBottom: "40%"
+        marginBottom: "60%"
     },
     headerDiv: {
         flex: 1,
@@ -84,8 +84,8 @@ const styles = StyleSheet.create({
         maxHeight: "15%",
         padding: ".75%",
         alignItems: "center",
-        backgroundColor: "white"
-             
+        backgroundColor: "white" ,
+        marginTop: "5%"   
     },
     text: {
         fontSize: 18,
@@ -97,7 +97,6 @@ const styles = StyleSheet.create({
         alignItems: "center",
         backgroundColor: "white",
         width: "100%",
-        height: "200%",
     },
     backButton: {
         height: "100%",
@@ -110,9 +109,10 @@ const styles = StyleSheet.create({
         minWidth: "10%",
     },
     headerText: {
-        marginLeft: "-40%",
+        marginLeft: "-42%",
         fontSize: 25,
         textDecorationLine: "underline",
+
     },
     inputs: {
         fontSize: 18,
@@ -124,15 +124,15 @@ const styles = StyleSheet.create({
         backgroundColor: "#800020"
     },
     updateButton: {
-        marginTop: "2%",
+        marginTop: "3%",
         borderWidth: 2,
         minWidth: "30%",
-        minHeight: "10%",
+        minHeight: "12%",
         alignItems: "center",
         justifyContent: "center"
     },
     inputs2: {
-        fontSize: 20,
+        fontSize: 25,
         fontWeight: "bold"
     }
 })
