@@ -74,6 +74,7 @@ const styles = StyleSheet.create({
         borderColor: "black",
         flexDirection: "column",
         alignItems: "center",
+        paddingTop: "5%"
     },
     pop: {
         backgroundColor: "red"
@@ -87,7 +88,6 @@ const styles = StyleSheet.create({
         // padding: ".75%",
         overflow: "hidden",
         marginTop: "1%",
-        // marginBottom: "-2%"
     },
     background: {
         width: '100%',

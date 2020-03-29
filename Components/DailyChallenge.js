@@ -179,13 +179,14 @@ const styles = StyleSheet.create({
         borderWidth: 4,
     },
     covidIcon: {
-        maxHeight: "95%",
+        maxHeight: "85%",
         maxWidth: "30%",
-        alignSelf: "center",
+        // alignSelf: "center",
     },
     backButton: {
         height: "95%",
-        justifyContent: "center",
+        marginTop: "5%"
+        // justifyContent: "center",
     },
     leftDiv: {
         flex: 1,

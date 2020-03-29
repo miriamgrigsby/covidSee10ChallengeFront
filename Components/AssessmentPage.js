@@ -1,6 +1,7 @@
 import React from 'react'
 import { StyleSheet, Text, View, Image } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { WebView } from 'react-native-webview';
 
 const AssessmentPage = ({navigation}) => {
     return (
@@ -13,14 +14,11 @@ const AssessmentPage = ({navigation}) => {
                         >
                     </Image>
                 </TouchableOpacity>
-                <Text style={styles.headerText}>Header</Text>
+                <Text style={styles.headerText}>Take the Fitness Level Assessment</Text>
             </View>
             <View style={styles.body}>
-                <Text style={styles.bodyText}>Bunch o Shit</Text>
+                <WebView source={{ uri: 'https://www.worldfitnesslevel.org/#/' }}></WebView>
             </View>
-            <TouchableOpacity style={styles.button}>
-                <Text>YOLO</Text>
-            </TouchableOpacity>
         </View>
     )
 }
@@ -31,31 +29,33 @@ const styles = StyleSheet.create({
         borderColor: "black",
         flexDirection: "column",
         alignItems: "center",
+        
     },
     headerDiv: {
         flex: 1,
         flexDirection: "row",
         width: "100%",
-        maxHeight: "15%",
+        maxHeight: "20%",
         alignItems: "center",
         padding: ".75%",
     },
     body: {
         flex: 1,
         flexDirection: "column",
-        width: "95%",
-        maxHeight: "70%",
+        width: "100%",
+        maxHeight: "100%",
         borderWidth: 2,
     },
     bodyText: {
         fontSize: 20
     },
     image: {
-        minWidth: "20%",
+        minWidth: "25%",
         borderWidth: 1,
         flex: 1,
-        justifyContent: "center",
+        justifyContent: "flex-end",
         borderColor: "transparent",
+        // marginTop: "5%"
     },
     covidImage: {
         maxHeight: "80%",
@@ -63,19 +63,12 @@ const styles = StyleSheet.create({
     },
     headerText: {
         width: "60%",
-        alignItems: "center",
         textAlign: "center",
         fontWeight: "bold",
-        fontSize: 30
+        fontSize: 25,
+        marginLeft: "5%"
 
     },
-    button: {
-        minWidth: "45%",
-        backgroundColor: "yellow",
-        minHeight: "10%",
-        marginTop: "5%",
-        alignItems: "center",
-    }
 })
 
 export default AssessmentPage
