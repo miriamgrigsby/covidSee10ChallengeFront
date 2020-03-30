@@ -19,21 +19,20 @@ const Home = (props) => {
 
     const signUp = (data) => {
         axios.post('https://covid-see10.herokuapp.com/api/auth/login', { username: data.username, password: data.password })
-        .then(response => _storeData(response.data))
-        .then(async () => {await AsyncStorage.getItem('token') ? loginRedirect() : alert("Authentication Failed\nPlease Try Again")  })
-        .catch(error => {
+            .then(response => _storeData(response.data))
+            .then(async () => { await AsyncStorage.getItem('token') ? loginRedirect() : alert("Authentication Failed\nPlease Try Again") })
+            .catch(error => {
                 alert("Authentication Failed\nPlease Try Again")
             })
-        .then(response => axios.get('https://covid-see10.herokuapp.com/api/authuserprofiles/', {headers: {'Authorization': `Token ${response.token}`}}).then(response => _storeData2(response.data)))
+            .then(response => axios.get('https://covid-see10.herokuapp.com/api/authuserprofiles/', { headers: { 'Authorization': `Token ${response.token}` } }).then(response => _storeData2(response.data)))
     }
 
-    const loginRedirect = async() => {
-        const token =  await  AsyncStorage.getItem('token')
+    const loginRedirect = async () => {
+        const token = await AsyncStorage.getItem('token')
 
-        axios.get('https://covid-see10.herokuapp.com/api/authuserprofiles/', {headers: {'Authorization': `Token ${token}`}})
-        .then(async (response) => await _storeData2(response.data))
-        .then(props.navigation.navigate('Main Page'))
-              
+        axios.get('https://covid-see10.herokuapp.com/api/authuserprofiles/', { headers: { 'Authorization': `Token ${token}` } })
+            .then(async (response) => await _storeData2(response.data))
+            .then(props.navigation.navigate('Main Page'))
     }
 
     const _storeData = async (response) => {
@@ -53,40 +52,47 @@ const Home = (props) => {
 
     const { register, handleSubmit, setValue } = useForm()
 
-
-
     useEffect(() => {
         register('username')
         register('password')
     }, [register])
 
+    return (
+        <ImageBackground
+            style={styles.background}
+            source={require("../homeBackgroundd.jpg")}
 
-
-
-    // onPress={handleSubmit(signUp)}
-        return (
-            <ImageBackground
-                style={styles.background}
-                source={require("../homeBackgroundd.jpg")}
-                    
-            >
-                <View style={styles.container}>
-                    <View style={styles.welcomeContainer}>
-                        <Text style={styles.welcome}>Welcome to the Covid-See10 Challenge</Text>
-                        <TextInput editable style={styles.username} placeholder="Username" onChangeText={text => { setValue('username', text) }}></TextInput>
-                        <TextInput editable style={styles.password} placeholder="Password" secureTextEntry={true} onChangeText={text => { setValue('password', text) }}></TextInput>
-                    </View>
-                    <View style={styles.authButtons}>
-                        <TouchableOpacity style={styles.signUpButton} onPress={() => props.navigation.navigate("Sign Up")} >
-                            <Text style={styles.signUpText}>Sign-Up</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity style={styles.loginButton} onPress={handleSubmit(signUp)}>
-                            <Text style={styles.loginText}>Login</Text>
-                        </TouchableOpacity>
-                    </View>
+        >
+            <View style={styles.container}>
+                <View style={styles.welcomeContainer}>
+                    <Text style={styles.welcome}>Welcome to the Covid-See10 Challenge</Text>
+                    <TextInput
+                        editable style={styles.username}
+                        placeholder="Username"
+                        onChangeText={text => { setValue('username', text) }}>
+                    </TextInput>
+                    <TextInput
+                        editable style={styles.password}
+                        placeholder="Password"
+                        secureTextEntry={true}
+                        onChangeText={text => { setValue('password', text) }}>
+                    </TextInput>
                 </View>
-            </ImageBackground>
-        );
+                <View style={styles.authButtons}>
+                    <TouchableOpacity
+                        style={styles.signUpButton}
+                        onPress={() => props.navigation.navigate("Sign Up")} >
+                        <Text style={styles.signUpText}>Sign-Up</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        style={styles.loginButton}
+                        onPress={handleSubmit(signUp)}>
+                        <Text style={styles.loginText}>Login</Text>
+                    </TouchableOpacity>
+                </View>
+            </View>
+        </ImageBackground>
+    );
 }
 
 const styles = StyleSheet.create({
@@ -102,7 +108,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: "center",
         width: "100%",
-        maxHeight: "65%",      
+        maxHeight: "65%",
     },
     authButtons: {
         flex: 1,
@@ -117,7 +123,6 @@ const styles = StyleSheet.create({
         textDecorationLine: "underline",
         fontWeight: "bold",
         marginBottom: "15%"
-        // color: "white"
     },
     username: {
         width: "70%",

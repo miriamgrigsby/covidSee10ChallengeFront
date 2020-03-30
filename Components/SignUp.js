@@ -10,7 +10,7 @@ const SignUp = (props) => {
     const signUp = (data) => {
         axios.post('https://covid-see10.herokuapp.com/api/auth/register', { first_name: data.first_name, last_name: data.last_name, username: data.username, password: data.password, email: data.email })
             .then(response => _storeData(response.data))
-            .then(async () => {await AsyncStorage.getItem('token') ? signupRedirect() : alert("Authentication Failed\nPlease Try Again")  })
+            .then(async () => { await AsyncStorage.getItem('token') ? signupRedirect() : alert("Authentication Failed\nPlease Try Again") })
             .catch(error => {
                 alert("Authentication Failed\nPlease Try Again")
             })
@@ -30,8 +30,6 @@ const SignUp = (props) => {
 
     const { register, handleSubmit, setValue } = useForm()
 
-
-
     useEffect(() => {
         register('first_name')
         register('last_name')
@@ -39,8 +37,6 @@ const SignUp = (props) => {
         register('password')
         register('email')
     }, [register])
-
-
 
     return (
         <ImageBackground
@@ -51,16 +47,36 @@ const SignUp = (props) => {
             <View style={styles.container}>
                 <View style={styles.welcomeContainer}>
                     <Text style={styles.welcome}>Welcome to the Covid-See10 Challenge</Text>
-                    <TextInput editable style={styles.email} placeholder="First Name" onChangeText={text => { setValue('first_name', text) }}></TextInput>
-                    <TextInput editable style={styles.email} placeholder="Last Name" onChangeText={text => { setValue('last_name', text) }}></TextInput>
-                    <TextInput editable style={styles.username} placeholder="Username" onChangeText={text => { setValue('username', text) }}></TextInput>
-                    <TextInput editable style={styles.password} placeholder="Password" secureTextEntry={true} onChangeText={text => { setValue('password', text) }}></TextInput>
-                    <TextInput editable style={styles.email} placeholder="Email" onChangeText={text => { setValue('email', text) }}></TextInput>
+                    <TextInput
+                        editable style={styles.email}
+                        placeholder="First Name"
+                        onChangeText={text => { setValue('first_name', text) }}>
+                    </TextInput>
+                    <TextInput
+                        editable style={styles.email}
+                        placeholder="Last Name"
+                        onChangeText={text => { setValue('last_name', text) }}>
+                    </TextInput>
+                    <TextInput
+                        editable style={styles.username}
+                        placeholder="Username"
+                        onChangeText={text => { setValue('username', text) }}>
+                    </TextInput>
+                    <TextInput
+                        editable style={styles.password}
+                        placeholder="Password"
+                        secureTextEntry={true}
+                        onChangeText={text => { setValue('password', text) }}>
+                    </TextInput>
+                    <TextInput
+                        editable style={styles.email}
+                        placeholder="Email"
+                        onChangeText={text => { setValue('email', text) }}>
+                    </TextInput>
                 </View>
                 <View style={styles.authButtons}>
                     <TouchableOpacity style={styles.signUpButton}
                         onPress={handleSubmit(signUp)}
-                    // onPress={() => this.props.navigation.navigate("Main Page")} 
                     >
                         <Text style={styles.signUpText}>Sign-Up</Text>
                     </TouchableOpacity>
@@ -73,7 +89,6 @@ const SignUp = (props) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        // alignItems: 'center',
         backgroundColor: "whitesmoke",
         borderTopWidth: 6,
         borderColor: "black",
@@ -82,7 +97,6 @@ const styles = StyleSheet.create({
     welcomeContainer: {
         flex: 1,
         alignItems: 'center',
-        // justifyContent: "center",
         width: "100%",
         minHeight: "40%",
         flexDirection: "column",
@@ -107,7 +121,6 @@ const styles = StyleSheet.create({
         height: "10%",
         borderWidth: 1,
         textAlign: "center",
-        // marginBottom: "4%",
         marginTop: "2%",
         backgroundColor: "black",
         color: "white"
@@ -120,7 +133,6 @@ const styles = StyleSheet.create({
         backgroundColor: "black",
         color: "white",
         marginTop: "2%",
-
     },
     email: {
         width: "80%",

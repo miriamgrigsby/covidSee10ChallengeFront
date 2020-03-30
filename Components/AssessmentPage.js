@@ -3,18 +3,24 @@ import { StyleSheet, Text, View, Image } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { WebView } from 'react-native-webview';
 
-const AssessmentPage = ({navigation}) => {
+const AssessmentPage = ({ navigation }) => {
     return (
         <View style={styles.container}>
             <View style={styles.headerDiv}>
-                <TouchableOpacity style={styles.image} onPress={() => navigation.toggleDrawer()}>
-                    <Image style={styles.covidImage}
+                <TouchableOpacity
+                    style={styles.image}
+                    onPress={() => navigation.toggleDrawer()}>
+                    <Image
+                        style={styles.covidImage}
                         source={require('../covidIcon.png')}
                         resizeMode="cover"
-                        >
+                    >
                     </Image>
                 </TouchableOpacity>
-                <Text style={styles.headerText}>Take the Fitness Level Assessment</Text>
+                <Text
+                    style={styles.headerText}>
+                    Take the Fitness Level Assessment
+                </Text>
             </View>
             <View style={styles.body}>
                 <WebView source={{ uri: 'https://www.worldfitnesslevel.org/#/' }}></WebView>
@@ -29,7 +35,6 @@ const styles = StyleSheet.create({
         borderColor: "black",
         flexDirection: "column",
         alignItems: "center",
-        
     },
     headerDiv: {
         flex: 1,
@@ -55,7 +60,6 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: "flex-end",
         borderColor: "transparent",
-        // marginTop: "5%"
     },
     covidImage: {
         maxHeight: "80%",
@@ -67,7 +71,6 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
         fontSize: 25,
         marginLeft: "5%"
-
     },
 })
 

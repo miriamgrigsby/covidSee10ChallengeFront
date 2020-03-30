@@ -1,37 +1,49 @@
-import React, { useState, useEffect } from 'react'
-import { StyleSheet, Text, View, Image, AsyncStorage, SectionList, ImageBackground } from 'react-native';
+import React, { useEffect } from 'react'
+import { StyleSheet, Text, View, Image, AsyncStorage, ImageBackground } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import axios from 'axios'
 
 const DailyChallenge = ({ navigation }) => {
 
     const [dailyChallenge, setDailyChallenge] = React.useState({})
+    const [token, setToken] = React.useState("")
+    const [userId, setUserId] = React.useState("")
+    const [challengeShowing, setChallengeView] = React.useState(true)
 
     useEffect(() => {
-        
-       const saveDaily = async() => {
+        AsyncStorage.multiGet(['userId', 'token'], (err, stores) => {
+            setUserId(stores[0][1])
+            setToken(stores[1][1])
+        })
+
+        const saveDaily = async () => {
             const dailyChallengeVar = await AsyncStorage.getItem('dailyChallenge')
-                setDailyChallenge(JSON.parse(dailyChallengeVar))
+            setDailyChallenge(JSON.parse(dailyChallengeVar))
         }
         saveDaily()
     }, [])
 
-
-
-    const challenge = async () => {
-        const dailyChallengeVar = await AsyncStorage.getItem('dailyChallenge')
-            setDailyChallenge(JSON.parse(dailyChallengeVar))
-            console.log(dailyChallenge.title)
-        
+    const addChallenge = () => {
+        axios.post('https://covid-see10.herokuapp.com/api/authuserchallenges/', { user: userId, challenge: dailyChallenge.id }, { headers: { 'Authorization': `Token ${token}` } })
+            .then(async (response) => {
+                const allChallengesArray = await AsyncStorage.getItem("allUsersChallenges")
+                const parsedArray = JSON.parse(allChallengesArray)
+                const storage = [...parsedArray, response.data]
+                await AsyncStorage.setItem('allUsersChallenges', JSON.stringify(storage))
+                await AsyncStorage.setItem('needsAnUpdate', 'true')
+            })
+            .then(alert(`You've Successfully joined the ${dailyChallenge.title} Challenge! Check Your Challenges to see a list of all the challenges you've joined!`))
+            .then(() => setChallengeView(false))
     }
 
-   
     return (
         <View style={styles.container}>
-             <View style={styles.headerDiv}>
-                 <ImageBackground style={styles.background} source={require("../mainPageBackground.jpg")}>
+            <View style={styles.headerDiv}>
+                <ImageBackground
+                    style={styles.background}
+                    source={require("../mainPageBackground.jpg")}>
                     <TouchableOpacity style={styles.backButton}
-                    onPress={() => navigation.toggleDrawer()}
+                        onPress={() => navigation.toggleDrawer()}
                     >
                         <Image style={styles.covidIcon}
                             source={require('../covidIcon.png')}
@@ -41,9 +53,9 @@ const DailyChallenge = ({ navigation }) => {
                     </TouchableOpacity >
                 </ImageBackground>
             </View>
-            <View style={styles.bottomDiv}> 
+            <View style={styles.bottomDiv}>
                 <View style={styles.leftDiv}>
-                   
+
                     <Text style={styles.title}>{dailyChallenge.title}</Text>
                     <Text style={styles.text}>Workout Type: {dailyChallenge.workout_type}</Text>
                     <Text style={styles.text2}>Sport: {dailyChallenge.sport}</Text>
@@ -51,19 +63,21 @@ const DailyChallenge = ({ navigation }) => {
                     <Text style={styles.text4}>Points: {dailyChallenge.points}</Text>
                 </View>
                 <View style={styles.rightDiv}>
-                    <TouchableOpacity style={styles.addButton}
-                        // onPress={() => console.log(dailyChallenge)}
-                    onPress={() => navigation.toggleDrawer()}
-                    >
-                        <Image style={styles.plusIcon}
-                            source={require('../plusIcon.png')}
-                            resizeMode="cover"
-                        >
-                        </Image>
-                    </TouchableOpacity >
+                    {
+                        challengeShowing
+                            ?
+                            <TouchableOpacity style={styles.addButton}
+                                onPress={addChallenge}
+                            >
+                                <Image style={styles.plusIcon}
+                                    source={require('../plusIcon.png')}
+                                    resizeMode="cover"
+                                >
+                                </Image>
+                            </TouchableOpacity >
+                            : null
+                    }
                     <TouchableOpacity style={styles.shareButton}
-                        // onPress={() => console.log(dailyChallenge)}
-                    onPress={() => navigation.toggleDrawer()}
                     >
                         <Image style={styles.shareIcon}
                             source={require('../shareIcon.png')}
@@ -74,8 +88,9 @@ const DailyChallenge = ({ navigation }) => {
                 </View>
             </View>
             <View style={styles.footer}>
-                <ImageBackground style={styles.background} source={require("../mainPageBackground.jpg")}>
-
+                <ImageBackground
+                    style={styles.background}
+                    source={require("../mainPageBackground.jpg")}>
                 </ImageBackground>
             </View>
         </View>
@@ -87,8 +102,6 @@ const DailyChallenge = ({ navigation }) => {
 const styles = StyleSheet.create({
     container: {
         flexGrow: 1,
-        // borderTopWidth: 4,
-        // borderColor: "black",
         width: "100%",
         height: "100%",
         backgroundColor: "white",
@@ -96,7 +109,6 @@ const styles = StyleSheet.create({
     shareButton: {
         height: "40%",
         minWidth: "60%",
-        
     },
     addButton: {
         height: "40%",
@@ -110,7 +122,6 @@ const styles = StyleSheet.create({
         height: "15%",
         alignSelf: "center",
         paddingTop: "2%"
-        
     },
     text2: {
         fontSize: 30,
@@ -136,9 +147,9 @@ const styles = StyleSheet.create({
         textAlign: "center",
         height: "15%",
         backgroundColor: "#636363",
-        width: "100%",   
-        paddingTop: "2%"  ,
-        color: "white"  
+        width: "100%",
+        paddingTop: "2%",
+        color: "white"
     },
     plusIcon: {
         maxHeight: "60%",
@@ -169,8 +180,6 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         width: "100%",
         maxHeight: "20%",
-        // padding: "2%",
-
     },
     bottomDiv: {
         flex: 1,
@@ -181,23 +190,19 @@ const styles = StyleSheet.create({
     covidIcon: {
         maxHeight: "85%",
         maxWidth: "30%",
-        // alignSelf: "center",
     },
     backButton: {
         height: "95%",
         marginTop: "5%"
-        // justifyContent: "center",
     },
     leftDiv: {
         flex: 1,
         flexDirection: "column",
         width: "75%",
         height: "100%",
-        // padding: "1%",
         justifyContent: "space-evenly",
         backgroundColor: "black",
-        
-        },
+    },
     rightDiv: {
         flex: 1,
         maxWidth: "20%",

@@ -7,21 +7,31 @@ import ChallengeInstance from './ChallengeInstance'
 const MainChallengePage = ({ navigation }) => {
 
     const [challenges, setChallenges] = React.useState([])
-    
+    const [userId, setUserId] = React.useState("")
 
     useEffect(() => {
-        axios.get('https://covid-see10.herokuapp.com/api/challenges/')
-            .then(async (response) => {   
-                const dailyChallenge = response.data.find(daily => daily.daily == true)
-                await AsyncStorage.setItem('dailyChallenge', JSON.stringify(dailyChallenge))
-                setChallenges(response.data)
-            })
+        getChallenges()
     }, [])
 
     const refHook = useRef(false)
     const didMountRef = useRef(false)
 
-    
+    const getChallenges = async () => {
+        await axios.get('https://covid-see10.herokuapp.com/api/challenges/')
+            .then(async (response) => {
+                const dailyChallenge = response.data.find(daily => daily.daily == true)
+                await AsyncStorage.setItem('dailyChallenge', JSON.stringify(dailyChallenge))
+                setChallenges(response.data)
+            })
+        await AsyncStorage.multiGet(['userId', 'token'], (err, stores) => {
+
+            setUserId(stores[0][1])
+            axios.get('https://covid-see10.herokuapp.com/api/authuserchallenges/', { headers: { 'Authorization': `Token ${stores[1][1]}` } })
+                .then(async (response) => {
+                    const x = await AsyncStorage.setItem('allUsersChallenges', JSON.stringify(response.data))
+                })
+        })
+    }
 
     useEffect(() => {
         if (didMountRef.current) {
@@ -30,11 +40,11 @@ const MainChallengePage = ({ navigation }) => {
                     setChallenges(response.data)
                 })
         } else didMountRef.current = true
-    },[])
+    }, [])
 
 
     const challengeCard = challenges.map(challenge => {
-        return <ChallengeInstance navigation={navigation} title={challenge.title} daily={challenge.daily} key={challenge.id} points={challenge.points} reps={challenge.reps} sport={challenge.sport} workoutType={challenge.workout_type} />
+        return <ChallengeInstance navigation={navigation} title={challenge.title} daily={challenge.daily} id={challenge.id} key={challenge.id} points={challenge.points} reps={challenge.reps} sport={challenge.sport} workoutType={challenge.workout_type} />
     })
 
     return (
@@ -42,10 +52,11 @@ const MainChallengePage = ({ navigation }) => {
             style={styles.background}
             source={require("../mainBackground.png")}
         >
-        <ScrollView>
-            <View style={styles.container} >
+            <ScrollView>
+                <View style={styles.container} >
                     <View style={styles.topContainer}>
-                        <TouchableOpacity style={styles.profile}
+                        <TouchableOpacity
+                            style={styles.profile}
                             onPress={() => navigation.toggleDrawer()}
                         >
                             <Image style={styles.hamburgerImage}
@@ -54,15 +65,17 @@ const MainChallengePage = ({ navigation }) => {
                             >
                             </Image>
                         </TouchableOpacity>
-                        <TouchableOpacity style={styles.dailyChallengeButton} onPress={() => navigation.navigate('Daily Challenge')}>
+                        <TouchableOpacity
+                            style={styles.dailyChallengeButton}
+                            onPress={() => navigation.navigate('Daily Challenge')}>
                             <Text style={styles.dailyChallengeText}>DAILY CHALLENGE</Text>
                         </TouchableOpacity>
                     </View>
                     <View style={styles.allChallenges}>
                         {challengeCard}
                     </View>
-            </View>
-                </ScrollView>
+                </View>
+            </ScrollView>
         </ImageBackground>
     )
 }
@@ -85,7 +98,6 @@ const styles = StyleSheet.create({
         width: "96%",
         maxHeight: "7%",
         justifyContent: "space-between",
-        // padding: ".75%",
         overflow: "hidden",
         marginTop: "1%",
     },
@@ -114,12 +126,11 @@ const styles = StyleSheet.create({
         flex: 1,
         borderColor: "transparent",
         marginTop: "15%",
-        
     },
     hamburgerImage: {
-        maxHeight:"70%",
+        maxHeight: "70%",
         width: "80%",
-        justifyContent: "center", 
+        justifyContent: "center",
         alignItems: 'center'
     },
     allChallenges: {
@@ -133,7 +144,6 @@ const styles = StyleSheet.create({
         padding: "1%",
         overflow: "scroll",
         marginBottom: "5%"
-
     },
     dailyChallengeText: {
         fontSize: 25,

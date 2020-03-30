@@ -1,68 +1,85 @@
-import React, { useEffect} from 'react'
+import React, { useEffect } from 'react'
 import { useForm } from "react-hook-form";
 import { StyleSheet, Text, View, Image } from 'react-native';
 import { TouchableOpacity, TextInput, ScrollView } from 'react-native-gesture-handler';
 import axios from 'axios'
 
-const NewChallenge = ({navigation}) => {
+const NewChallenge = ({ navigation }) => {
 
     const addNewChallenge = (data) => {
-        axios.post('https://covid-see10.herokuapp.com/api/challenges/', {daily: true, title: data.title, workout_type: data.workout_type, reps: data.reps, sport: data.sport, points: data.points })
-        
+        axios.post('https://covid-see10.herokuapp.com/api/challenges/', { daily: true, title: data.title, workout_type: data.workout_type, reps: data.reps, sport: data.sport, points: data.points })
     }
-    const {register, handleSubmit, setValue} = useForm() 
 
-  
+    const { register, handleSubmit, setValue } = useForm()
+
     useEffect(() => {
-       register('title')
-       register('workout_type')
-       register('reps')
-       register('sport')
-       register('points')
+        register('title')
+        register('workout_type')
+        register('reps')
+        register('sport')
+        register('points')
     }, [register])
 
     return (
         <ScrollView>
-        <View style={styles.container}>
-            <View style={styles.headerDiv}>
-                <TouchableOpacity style={styles.backButton}  onPress={() => navigation.toggleDrawer()}>
-                    <Image style={styles.covidIcon}
-                        source={require('../covidIcon.png')}
-                        resizeMode="contain"
+            <View style={styles.container}>
+                <View style={styles.headerDiv}>
+                    <TouchableOpacity
+                        style={styles.backButton}
+                        onPress={() => navigation.toggleDrawer()}>
+                        <Image style={styles.covidIcon}
+                            source={require('../covidIcon.png')}
+                            resizeMode="contain"
+                        >
+                        </Image>
+                    </TouchableOpacity >
+                    <Text style={styles.headerText}>Create Your Own Challenge</Text>
+                </View>
+                <View style={styles.bottomDiv}>
+                    <Text style={styles.text}>Title</Text>
+                    <TextInput
+                        editable style={styles.inputs}
+                        defaultValue={""}
+                        onChangeText={text => {
+                            setValue('title', text)
+                        }}></TextInput>
+                    <Text style={styles.text} >Workout Type</Text>
+                    <TextInput
+                        editable style={styles.inputs}
+                        defaultValue={""}
+                        onChangeText={text => {
+                            setValue('workout_type', text)
+                        }}></TextInput>
+                    <Text style={styles.text}>Reps</Text>
+                    <TextInput
+                        editable style={styles.inputs}
+                        defaultValue={""}
+                        onChangeText={text => {
+                            setValue('reps', text)
+                        }}></TextInput>
+                    <Text style={styles.text}>Sport</Text>
+                    <TextInput
+                        editable style={styles.inputs}
+                        defaultValue={""}
+                        onChangeText={text => {
+                            setValue('sport', text)
+                        }}></TextInput>
+                    <Text style={styles.text}>Points</Text>
+                    <TextInput
+                        editable style={styles.inputs}
+                        defaultValue={""}
+                        onChangeText={text => {
+                            setValue('points', text)
+                        }}></TextInput>
+                    <TouchableOpacity
+                        style={styles.updateButton}
+                        onPress={handleSubmit(addNewChallenge)}
                     >
-                    </Image>
-                </TouchableOpacity > 
-                <Text style={styles.headerText}>Create Your Own Challenge</Text>         
+                        <Text style={styles.inputs2} >Submit</Text>
+                    </TouchableOpacity>
+                </View>
             </View>
-            <View style={styles.bottomDiv}>
-                <Text style={styles.text}>Title</Text>
-                <TextInput editable style={styles.inputs}  defaultValue={""} onChangeText={text =>  {
-                    setValue('title', text)
-                }}></TextInput>
-                <Text style={styles.text} >Workout Type</Text>
-                <TextInput editable style={styles.inputs} defaultValue={""} onChangeText={text =>  {
-                    setValue('workout_type', text)}}></TextInput>
-                <Text style={styles.text}>Reps</Text>
-                <TextInput editable style={styles.inputs} defaultValue={""} onChangeText={text =>  {
-                    setValue('reps', text)}}></TextInput>
-                <Text style={styles.text}>Sport</Text>
-                <TextInput editable style={styles.inputs} 
-                defaultValue={""}
-                onChangeText={text =>  {
-                    setValue('sport', text)}}></TextInput>
-                <Text style={styles.text}>Points</Text>
-                <TextInput editable style={styles.inputs} 
-                defaultValue={""} onChangeText={text =>  {
-                    setValue('points', text)}}></TextInput>
-                <TouchableOpacity style={styles.updateButton} 
-                onPress={handleSubmit(addNewChallenge)}
-                >
-                    <Text style={styles.inputs2} >Submit</Text>
-                </TouchableOpacity>
-            </View>
-        </View>
         </ScrollView>
-        
     )
 }
 
@@ -71,7 +88,6 @@ const styles = StyleSheet.create({
         flex: 1,
         maxWidth: "100%",
         minHeight: "100%",
-        // padding: ".75%",
         borderTopWidth: 4,
         backgroundColor: "black",
         opacity: 0.8,
@@ -84,13 +100,13 @@ const styles = StyleSheet.create({
         maxHeight: "15%",
         padding: ".75%",
         alignItems: "center",
-        backgroundColor: "white" ,
-        marginTop: "5%"   
+        backgroundColor: "white",
+        marginTop: "5%"
     },
     text: {
         fontSize: 18,
         fontWeight: "bold",
-         marginTop: "2%",
+        marginTop: "2%",
     },
     bottomDiv: {
         flex: 1,

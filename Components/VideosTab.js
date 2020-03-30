@@ -14,8 +14,6 @@ const VideosTab = ({navigation}) => {
                 </Image>
             </TouchableOpacity >          
         </View>
-        
-        
     )
 }
 
