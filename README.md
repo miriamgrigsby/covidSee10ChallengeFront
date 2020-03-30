@@ -49,7 +49,7 @@ The app requires the following packages:
 ### Features
 
 The main features of the app include: full authentication, viewing all challenges, adding/deleting all challenges to your list, a daily challenge, a travel menu to take you to different pages, a free online assessment, a form to create a new challenge for everyone to see, a place to view/delete/complete your challenge, a video tab to see all the videos everyone has uploaded, a tab to see all the users profiles, a logbook to view all your completed challenges, a scoreboard, an updatable profile page. 
-![Screenshot](profile.png)
+![Screenshot](drawer.png)
 
 ### Operation Overview
 
