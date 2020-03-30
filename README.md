@@ -49,6 +49,7 @@ The app requires the following packages:
 ### Features
 
 The main features of the app include: full authentication, viewing all challenges, adding/deleting all challenges to your list, a daily challenge, a travel menu to take you to different pages, a free online assessment, a form to create a new challenge for everyone to see, a place to view/delete/complete your challenge, a video tab to see all the videos everyone has uploaded, a tab to see all the users profiles, a logbook to view all your completed challenges, a scoreboard, an updatable profile page. 
+![Screenshot](profile.png)
 
 ### Operation Overview
 
@@ -86,7 +87,7 @@ Fill out the form to create a new challenge for all users. It doesn't auto add t
 
 Scroll through a list of all your challenges. Think of this as your one-stop-shop for all things YOUR fitness related. You can press on a challenge to complete it (actual form for completion not-viable), or press and hold to permanently leave the challenge. Right now, your on an honor code to complete the challenges you're a part of everyday and within 24 hours. Soon, the app will boot you off the challenge if not completed in 24 hours. You will only gain points for completing a challenge. You'll be renewed to the challenge everyday until you choose to leave. 
 
-![Screenshot](yourChallenge.png)
+![Screenshot](yourChallenges.png)
 
 ### Videos
 
