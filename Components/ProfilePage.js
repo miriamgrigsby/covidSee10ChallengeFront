@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { StyleSheet, Text, View, Image, ImageBackground, AsyncStorage, } from 'react-native';
-import { TouchableOpacity, TextInput } from 'react-native-gesture-handler';
+import { TouchableOpacity, TextInput, ScrollView } from 'react-native-gesture-handler';
 import axios from 'axios'
 import { useForm } from "react-hook-form";
 
@@ -70,7 +70,7 @@ const ProfilePage = ({ navigation }) => {
     }
 
     const updateProfile = (data) => {
-        axios.post('https://covid-see10.herokuapp.com/api/authuserprofiles/', { user: parseInt(userId), first_name: data.first_name ? data.first_name : firstName, email: data.email ? data.email : email, last_name: data.last_name ? data.last_name : lastName, city: data.city ? data.city : city, country: data.country ? data.country : country, bio: data.bio ? data.bio : bio, age: parseInt(data.age) ? parseInt(data.age) : parseInt(age), gender: data.gender ? data.gender : gender }, { headers: { 'Authorization': `Token ${userToken}` } })
+        axios.put(`https://covid-see10.herokuapp.com/api/authuserprofiles/${profileId}/`, { user: parseInt(userId), first_name: data.first_name ? data.first_name : firstName, email: data.email ? data.email : email, last_name: data.last_name ? data.last_name : lastName, city: data.city ? data.city : city, country: data.country ? data.country : country, bio: data.bio ? data.bio : bio, age: parseInt(data.age) ? parseInt(data.age) : age, gender: data.gender ? data.gender : gender }, { headers: { 'Authorization': `Token ${userToken}` } }).then(response => console.log(response.data))
 
     }
     const { register, handleSubmit, setValue } = useForm()
@@ -92,11 +92,13 @@ const ProfilePage = ({ navigation }) => {
             style={styles.background}
             source={require("../mainPageBackground.jpg")}
         >
+            <ScrollView>
             <View style={styles.container} >
                 <View style={styles.headerDiv}>
                     <TouchableOpacity
                         style={styles.backButton}
-                        onPress={() => navigation.toggleDrawer()}>
+                        onPress={() => navigation.toggleDrawer()}
+                    >
                         <Image
                             style={styles.covidIcon}
                             source={require('../covidIcon.png')}
@@ -109,7 +111,7 @@ const ProfilePage = ({ navigation }) => {
                     </View>
                     <Image
                         style={styles.profileImage}
-                        source={require('../profileIcon.png')}
+                        source={photo == "null" ? require('../profileIcon.png') : require('../covidIcon.png')}
                         resizeMode="contain"
                     >
                     </Image>
@@ -192,6 +194,7 @@ const ProfilePage = ({ navigation }) => {
                     </View>
                 </View>
             </View>
+            </ScrollView>
         </ImageBackground>
     );
 }
@@ -279,10 +282,11 @@ const styles = StyleSheet.create({
 
     bio: {
         width: "80%",
-        height: "8%",
+        height: "15%",
         borderWidth: 1,
         textAlign: "center",
-        fontSize: 15
+        fontSize: 15,
+        marginBottom: "5%"
     },
     text: {
         fontSize: 15,
@@ -291,13 +295,11 @@ const styles = StyleSheet.create({
     },
     updateButton: {
         marginTop: "1%",
-        minWidth: "60%",
-        height: "30%",
+        minWidth: "30%",
         borderWidth: 1,
-        justifyContent: "center",
         backgroundColor: "black",
         opacity: 0.8,
-
+        marginBottom: "35%"
     }
 });
 

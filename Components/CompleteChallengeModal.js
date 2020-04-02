@@ -8,14 +8,13 @@ const CompleteChallengeModal = ({ navigation }) => {
     return (
         <View style={{
             flex: 1,
-            alignItems: 'center',
             justifyContent: 'center',
             backgroundColor: "white",
             opacity: 0.8
         }}>
             <Text style={{
                 fontSize: 30,
-                extAlign: "center"
+                textAlign: "center"
             }}>
                 Upload a photo/video to complete this challenge!
             </Text>
