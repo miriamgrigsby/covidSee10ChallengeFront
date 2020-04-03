@@ -6,15 +6,13 @@ import Constants from 'expo-constants';
 import nextId from 'react-id-generator'
 
 
-function Item({ data, deleteItem, navigation }) {
+function Item({ data, deleteItem, navigation, completeChallenge }) {
     return (
 
 
         <View style={styles.challengeButtonsDiv}>
             <TouchableOpacity style={styles.challengeButtons1}
-                onPress={() => navigation.navigate('HomeLoaded', {
-                    screen: "MyModal"
-                })}
+                onPress={() => completeChallenge(data.id)}
                 onLongPress={() => deleteItem(data.id, data.title)}
             >
                 <Text style={styles.titleText}>{data.title}</Text>
@@ -113,6 +111,15 @@ class YourChallenges extends Component {
         })
     }
 
+    completeChallenge = async (id) => {
+        const challengeId = id
+        const userChallengeIdObject = this.state.allUserChallenges.find(id => id.challenge == challengeId)
+        await AsyncStorage.setItem('userChallengeId', JSON.stringify(userChallengeIdObject.id))
+        this.props.navigation.navigate('HomeLoaded', {
+                screen: "MyModal"
+            })
+    }
+
     render() {
 
         return (
@@ -131,7 +138,7 @@ class YourChallenges extends Component {
                 <View style={styles.container}>
                     <FlatList
                         data={this.state.allChallenges}
-                        renderItem={({ item }) => <Item data={item} deleteItem={this.deleteItem} navigation={this.props.navigation} />}
+                        renderItem={({ item }) => <Item data={item} deleteItem={this.deleteItem} navigation={this.props.navigation} completeChallenge={this.completeChallenge}/>}
                         keyExtractor={() => nextId()}
                     />
                 </View>

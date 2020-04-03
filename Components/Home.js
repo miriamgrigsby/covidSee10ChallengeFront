@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
 import { StyleSheet, Text, View, ImageBackground, AsyncStorage } from 'react-native';
-import { TextInput, TouchableOpacity } from 'react-native-gesture-handler';
+import { TextInput, TouchableOpacity, ScrollView } from 'react-native-gesture-handler';
 import axios from 'axios'
+import Constants from 'expo-constants';
 
 import { useForm } from "react-hook-form";
 
@@ -63,21 +64,21 @@ const Home = (props) => {
             source={require("../homeBackgroundd.jpg")}
 
         >
-            <View style={styles.container}>
-                <View style={styles.welcomeContainer}>
-                    <Text style={styles.welcome}>Welcome to the Covid-See10 Challenge</Text>
-                    <TextInput
-                        editable style={styles.username}
-                        placeholder="Username"
-                        onChangeText={text => { setValue('username', text) }}>
-                    </TextInput>
-                    <TextInput
-                        editable style={styles.password}
-                        placeholder="Password"
-                        secureTextEntry={true}
-                        onChangeText={text => { setValue('password', text) }}>
-                    </TextInput>
-                </View>
+            <ScrollView style={styles.container} contentContainerStyle={{
+                alignItems: 'center'
+            }}>
+                <Text style={styles.welcome}>Welcome to the Covid-See10 Challenge</Text>
+                <TextInput
+                    editable style={styles.username}
+                    placeholder="Username"
+                    onChangeText={text => { setValue('username', text) }}>
+                </TextInput>
+                <TextInput
+                    editable style={styles.password}
+                    placeholder="Password"
+                    secureTextEntry={true}
+                    onChangeText={text => { setValue('password', text) }}>
+                </TextInput>
                 <View style={styles.authButtons}>
                     <TouchableOpacity
                         style={styles.signUpButton}
@@ -90,7 +91,8 @@ const Home = (props) => {
                         <Text style={styles.loginText}>Login</Text>
                     </TouchableOpacity>
                 </View>
-            </View>
+
+            </ScrollView>
         </ImageBackground>
     );
 }
@@ -98,52 +100,50 @@ const Home = (props) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        alignItems: 'center',
         backgroundColor: "whitesmoke",
-        borderTopWidth: 6,
-        borderColor: "black"
-    },
-    welcomeContainer: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: "center",
-        width: "100%",
-        maxHeight: "65%",
+        minHeight: "100%",
+        
+        paddingTop: "15%",
     },
     authButtons: {
         flex: 1,
         flexDirection: "row",
         justifyContent: "space-evenly",
         width: "100%",
-        marginTop: "1.5%"
+        minHeight: 90,
+        marginTop: "5%",
+        // backgroundColor: "blue"
     },
     welcome: {
         fontSize: 30,
         textAlign: 'center',
         textDecorationLine: "underline",
         fontWeight: "bold",
-        marginBottom: "15%"
+        marginBottom: "10%"
     },
     username: {
         width: "70%",
-        height: "9%",
+        height: 50,
         borderWidth: 1,
         textAlign: "center",
-        marginBottom: "4%",
-        marginTop: "10%",
+        // marginBottom: "4%",
         backgroundColor: "black",
-        color: "white"
+        color: "white",
+        margin: "2%"
     },
     password: {
         width: "70%",
-        height: "14%",
+        height: 50,
         borderWidth: 1,
         textAlign: "center",
         backgroundColor: "black",
-        color: "white"
+        color: "white",
+        alignSelf: "center",
+        margin: "2%"
+
     },
     loginButton: {
-        maxHeight: "15%",
+        maxHeight: 60,
         minWidth: "47%",
         borderWidth: 1,
         flex: 1,
@@ -157,7 +157,7 @@ const styles = StyleSheet.create({
         color: "white"
     },
     signUpButton: {
-        maxHeight: "15%",
+        maxHeight: 60,
         minWidth: "48%",
         borderWidth: 1,
         flex: 1,
@@ -168,7 +168,8 @@ const styles = StyleSheet.create({
     signUpText: {
         textAlign: "center",
         fontSize: 20,
-        color: "white"
+        color: "white",
+        justifyContent: 'center'
     },
     background: {
         width: '100%',

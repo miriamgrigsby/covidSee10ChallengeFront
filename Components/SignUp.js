@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
         width: "100%",
         minHeight: "40%",
         flexDirection: "column",
-        justifyContent: "space-evenly"
+        justifyContent: "space-evenly",
     },
     authButtons: {
         flex: 1,
@@ -118,7 +118,7 @@ const styles = StyleSheet.create({
     },
     username: {
         width: "80%",
-        height: "10%",
+        height: 50,
         borderWidth: 1,
         textAlign: "center",
         marginTop: "2%",
@@ -127,7 +127,7 @@ const styles = StyleSheet.create({
     },
     password: {
         width: "80%",
-        height: "10%",
+        height: 50,
         borderWidth: 1,
         textAlign: "center",
         backgroundColor: "black",
@@ -136,7 +136,7 @@ const styles = StyleSheet.create({
     },
     email: {
         width: "80%",
-        height: "10%",
+        height: 50,
         borderWidth: 1,
         textAlign: "center",
         backgroundColor: "black",
