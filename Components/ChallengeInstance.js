@@ -46,7 +46,7 @@ const ChallengeInstance = ({ points, reps, sport, workoutType, title, id }) => {
                                 <Text style={styles.pointsText}>Reps: {reps}</Text>
                             </View>
                         </TouchableOpacity>
-
+                        <View style={styles.addShareButtons}>
                         <TouchableOpacity
                             style={styles.challengeButtons2}
                             value={id} onPress={addChallenge}>
@@ -56,6 +56,17 @@ const ChallengeInstance = ({ points, reps, sport, workoutType, title, id }) => {
                             >
                             </Image>
                         </TouchableOpacity>
+                        <TouchableOpacity
+                            style={styles.challengeButtons2}
+                            value={id} onPress={addChallenge}>
+                            <Image
+                                style={styles.plusIcon}
+                                source={require('../shareIcon.png')}
+                            >
+                            </Image>
+                        </TouchableOpacity>
+                        </View>
+                        
                     </> : null
             }
         </View>
@@ -67,19 +78,29 @@ const styles = StyleSheet.create({
     challengeButtonsDiv: {
         flex: 1,
         minWidth: "100%",
-        maxHeight: "20%",
+        minHeight:85,
         flexDirection: "row",
         justifyContent: "space-between",
-        marginBottom: "1%",
-        alignItems: "center"
+        marginBottom: "3%",
+        alignItems: "center",
+        borderWidth: 2,
+        // borderColor: "white"
+    },
+
+    addShareButtons: {
+        flex: 1,
+        // flexDirection: "column",
+        justifyContent: "space-around",
+        height: "100%",
+        marginTop: "4%",
     },
     plusIcon: {
-        width: "80%",
-        height: "75%"
+        width: "68%",
+        height: "65%"
     },
     challengeInfo: {
         backgroundColor: "gray",
-        height: "100%",
+        maxHeight: "70%",
         flex: 1,
         flexDirection: "row",
         justifyContent: "space-evenly",
@@ -106,16 +127,18 @@ const styles = StyleSheet.create({
         flex: 1,
         borderWidth: 2,
         minWidth: "88%",
-        maxHeight: "100%",
+        minHeight: "110%",
         flexDirection: "column",
         backgroundColor: "white",
+        marginTop: "4%"
     },
     challengeButtons2: {
         minWidth: "10%",
-        height: "50%",
+        minHeight: "45%",
         alignItems: "center",
         justifyContent: "center",
-        marginLeft: "1%"
+        // backgroundColor: "blue"
+        // marginLeft: "1%"
     },
 
 })

@@ -83,11 +83,11 @@ const ProfilePage = ({ navigation }) => {
     };
 
     const createNewProfile = (data) => {
-        axios.post('https://covid-see10.herokuapp.com/api/authuserprofiles/', { user: parseInt(userId), first_name: data.first_name ? data.first_name : firstName, email: data.email ? data.email : email, last_name: data.last_name ? data.last_name : lastName, city: data.city, country: data.country, bio: data.bio, age: parseInt(data.age), gender: data.gender }, { headers: { 'Authorization': `Token ${userToken}` } })
+        axios.post('https://covid-see10.herokuapp.com/api/authuserprofiles/', { user: parseInt(userId), first_name: data.first_name ? data.first_name : firstName, email: data.email ? data.email : email, last_name: data.last_name ? data.last_name : lastName, city: data.city, country: data.country, bio: data.bio, age: parseInt(data.age), gender: data.gender}, { headers: { 'Authorization': `Token ${userToken}` } })
     }
 
     const updateProfile = (data) => {
-        axios.put(`https://covid-see10.herokuapp.com/api/authuserprofiles/${profileId}/`, { user: parseInt(userId), first_name: data.first_name ? data.first_name : firstName, email: data.email ? data.email : email, last_name: data.last_name ? data.last_name : lastName, city: data.city ? data.city : city, country: data.country ? data.country : country, bio: data.bio ? data.bio : bio, age: parseInt(data.age) ? parseInt(data.age) : age, gender: data.gender ? data.gender : gender }, { headers: { 'Authorization': `Token ${userToken}` } })
+        axios.put(`https://covid-see10.herokuapp.com/api/authuserprofiles/${profileId}/`, { user: parseInt(userId), first_name: data.first_name ? data.first_name : firstName, email: data.email ? data.email : email, last_name: data.last_name ? data.last_name : lastName, city: data.city ? data.city : city, country: data.country ? data.country : country, bio: data.bio ? data.bio : bio, age: parseInt(data.age) ? parseInt(data.age) : age, gender: data.gender ? data.gender : gender}, { headers: { 'Authorization': `Token ${userToken}` } })
 
     }
     const { register, handleSubmit, setValue } = useForm()

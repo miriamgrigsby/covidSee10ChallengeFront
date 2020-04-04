@@ -25,7 +25,6 @@ const Home = (props) => {
             .catch(error => {
                 alert("Authentication Failed\nPlease Try Again")
             })
-            .then(response => axios.get('https://covid-see10.herokuapp.com/api/authuserprofiles/', { headers: { 'Authorization': `Token ${response.token}` } }).then(response => _storeData2(response.data)))
     }
 
     const loginRedirect = async () => {

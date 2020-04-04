@@ -1,16 +1,18 @@
 import React, { useEffect } from 'react'
 import { useForm } from "react-hook-form";
-import { StyleSheet, Text, View, Image } from 'react-native';
-import { TouchableOpacity, TextInput, ScrollView } from 'react-native-gesture-handler';
+import { StyleSheet, Text, View, Image} from 'react-native';
+import { TouchableOpacity, TextInput, ScrollView, Form } from 'react-native-gesture-handler';
 import axios from 'axios'
 
 const NewChallenge = ({ navigation }) => {
 
     const addNewChallenge = (data) => {
         axios.post('https://covid-see10.herokuapp.com/api/challenges/', { daily: true, title: data.title, workout_type: data.workout_type, reps: data.reps, sport: data.sport, points: data.points })
+      
     }
 
-    const { register, handleSubmit, setValue } = useForm()
+
+    const { register, handleSubmit, setValue} = useForm()
 
     useEffect(() => {
         register('title')
@@ -43,7 +45,7 @@ const NewChallenge = ({ navigation }) => {
                         onChangeText={text => {
                             setValue('title', text)
                         }}></TextInput>
-                    <Text style={styles.text} >Workout Type</Text>
+                    <Text style={styles.text}>Workout Type</Text>
                     <TextInput
                         editable style={styles.inputs}
                         defaultValue={""}
@@ -154,3 +156,4 @@ const styles = StyleSheet.create({
 })
 
 export default NewChallenge
+
