@@ -27,8 +27,16 @@ class CompleteChallengeModal extends Component {
     }
 
     completeChallenge = () => {
-        console.log(typeof(this.state.userId), this.state.userId, typeof(this.state.userChallengeId), this.state.userChallengeId, typeof(this.state.video), this.state.video )
-        // axios.post('https://covid-see10.herokuapp.com/api/authcompletedchallenges/', { user: this.state.userId, user_challenge: this.state.userChallengeId, photo: this.state.video}, { headers: { 'Authorization': `Token ${this.state.token}` } })
+
+        const data = new FormData() 
+        data.append("user", this.state.userId)
+        data.append("user_challenge", this.state.userChallengeId)
+        data.append("photo", {uri: this.state.video, name: "challengePhoto.mp4", type: "video/mp4"})
+
+        axios.post('https://covid-see10.herokuapp.com/api/authcompletedchallenges/', {data}, { headers: { 'Authorization': `Token ${this.state.token}`, "Content-Type": "multipart/form-data" } })
+            .then(response => console.log(response))
+        
+        // axios.post('https://covid-see10.herokuapp.com/api/authcompletedchallenges/', { user: this.state.userId, user_challenge: this.state.userChallengeId, photo: {uri: this.state.video, name: "challengePhoto", type: "video/mp4"}}, { headers: { 'Authorization': `Token ${this.state.token}` } })
         //     .then(response => console.log(response))
             // .then(alert(`You've Successfully Completed this Challenge!`))
     }

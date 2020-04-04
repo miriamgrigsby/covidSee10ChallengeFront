@@ -23,7 +23,7 @@ const SignUp = (props) => {
 
     const _storeData = async (response) => {
         try {
-            await AsyncStorage.multiSet([['userId', JSON.stringify(response.user.id)], ['token', response.token], ['username', response.user.username], ['email', response.user.email], ['first_name', response.user.first_name], ['last_name', response.user.last_name]])
+            await AsyncStorage.multiSet([['userId', JSON.stringify(response.user.id)], ['token', response.token], ['username', response.user.username], ['email', response.user.email], ['first_name', response.user.first_name], ['last_name', response.user.last_name], ['photo', ""]])
         } catch (error) {
         }
     };

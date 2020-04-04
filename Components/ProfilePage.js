@@ -3,6 +3,8 @@ import { StyleSheet, Text, View, Image, ImageBackground, AsyncStorage, } from 'r
 import { TouchableOpacity, TextInput, ScrollView } from 'react-native-gesture-handler';
 import axios from 'axios'
 import { useForm } from "react-hook-form";
+import * as ImagePicker from 'expo-image-picker';
+import Constants from 'expo-constants';
 
 
 const ProfilePage = ({ navigation }) => {
@@ -65,12 +67,27 @@ const ProfilePage = ({ navigation }) => {
         })
     }, [])
 
+    const _pickImage = async () => {
+        let result = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.Images,
+            allowsEditing: true,
+            aspect: [10, 10],
+            quality: 1,
+        });
+
+        console.log(result);
+
+        if (!result.cancelled) {
+            setPhoto(result.uri)
+        }
+    };
+
     const createNewProfile = (data) => {
         axios.post('https://covid-see10.herokuapp.com/api/authuserprofiles/', { user: parseInt(userId), first_name: data.first_name ? data.first_name : firstName, email: data.email ? data.email : email, last_name: data.last_name ? data.last_name : lastName, city: data.city, country: data.country, bio: data.bio, age: parseInt(data.age), gender: data.gender }, { headers: { 'Authorization': `Token ${userToken}` } })
     }
 
     const updateProfile = (data) => {
-        axios.put(`https://covid-see10.herokuapp.com/api/authuserprofiles/${profileId}/`, { user: parseInt(userId), first_name: data.first_name ? data.first_name : firstName, email: data.email ? data.email : email, last_name: data.last_name ? data.last_name : lastName, city: data.city ? data.city : city, country: data.country ? data.country : country, bio: data.bio ? data.bio : bio, age: parseInt(data.age) ? parseInt(data.age) : age, gender: data.gender ? data.gender : gender }, { headers: { 'Authorization': `Token ${userToken}` } }).then(response => console.log(response.data))
+        axios.put(`https://covid-see10.herokuapp.com/api/authuserprofiles/${profileId}/`, { user: parseInt(userId), first_name: data.first_name ? data.first_name : firstName, email: data.email ? data.email : email, last_name: data.last_name ? data.last_name : lastName, city: data.city ? data.city : city, country: data.country ? data.country : country, bio: data.bio ? data.bio : bio, age: parseInt(data.age) ? parseInt(data.age) : age, gender: data.gender ? data.gender : gender }, { headers: { 'Authorization': `Token ${userToken}` } })
 
     }
     const { register, handleSubmit, setValue } = useForm()
@@ -93,107 +110,125 @@ const ProfilePage = ({ navigation }) => {
             source={require("../mainPageBackground.jpg")}
         >
             <ScrollView>
-            <View style={styles.container} >
-                <View style={styles.headerDiv}>
-                    <TouchableOpacity
-                        style={styles.backButton}
-                        onPress={() => navigation.toggleDrawer()}
-                    >
-                        <Image
-                            style={styles.covidIcon}
-                            source={require('../covidIcon.png')}
-                            resizeMode="cover"
+                <View style={styles.container} >
+                    <View style={styles.headerDiv}>
+                        <TouchableOpacity
+                            style={styles.backButton}
+                            onPress={() => navigation.toggleDrawer()}
                         >
-                        </Image>
-                    </TouchableOpacity >
-                    <View style={styles.headerText}>
-                        <Text style={styles.headerTextStyle2}>Welcome!</Text>
-                    </View>
-                    <Image
-                        style={styles.profileImage}
-                        source={photo == "null" ? require('../profileIcon.png') : require('../covidIcon.png')}
-                        resizeMode="contain"
-                    >
-                    </Image>
-                </View>
-                <View style={styles.bottomDiv}>
-                    <View style={styles.rightBottomDiv}>
-                        <Text style={styles.text}>First Name</Text>
-                        <TextInput
-                            editable style={styles.inputs}
-                            placeholder={firstName}
-                            onChangeText={text => {
-                                setValue('first_name', text)
-                            }}>
-                            {firstName}
-                        </TextInput>
-                        <Text style={styles.text}>Last Name</Text>
-                        <TextInput
-                            editable style={styles.inputs}
-                            placeholder={lastName}
-                            onChangeText={text => {
-                                setValue('last_name', text)
-                            }}>{lastName}</TextInput>
-                        <Text style={styles.text}>Email</Text>
-                        <TextInput
-                            editable style={styles.inputs}
-                            placeholder={email}
-                            onChangeText={text => {
-                                setValue('email', text)
-                            }}> {email}</TextInput>
-                        <Text style={styles.text}>Town/City</Text>
-                        <TextInput
-                            editable style={styles.inputs}
-                            placeholder="Colorado Springs"
-                            onChangeText={text => {
-                                setValue('city', text)
-                            }}>{city ? city : ""}</TextInput>
-                        <Text style={styles.text}>Country</Text>
-                        <TextInput
-                            editable style={styles.inputs}
-                            placeholder="United States"
-                            onChangeText={text => {
-                                setValue('country', text)
-                            }}>{country ? country : ""}</TextInput>
-                        <Text style={styles.text}>Age</Text>
-                        <TextInput
-                            editable style={styles.inputs}
-                            placeholder="25"
-                            onChangeText={text => {
-                                setValue('age', text)
-                            }}>{age ? age : ""}</TextInput>
-                        <Text style={styles.text}>Gender</Text>
-                        <TextInput
-                            editable style={styles.inputs}
-                            placeholder="M/F"
-                            onChangeText={text => {
-                                setValue('gender', text)
-                            }}>{gender ? "F/M" : gender}</TextInput>
-                        <Text style={styles.text}>Bio</Text>
-                        <TextInput
-                            editable style={styles.bio}
-                            placeholder="Write something about yourself!"
-                            onChangeText={text => {
-                                setValue('bio', text)
-                            }}>{bio ? bio : ""}</TextInput>
+                            <Image
+                                style={styles.covidIcon}
+                                source={require('../covidIcon.png')}
+                                resizeMode="cover"
+                            >
+                            </Image>
+                        </TouchableOpacity >
+                        <View style={styles.headerText}>
+                            <Text style={styles.headerTextStyle2}>Welcome!</Text>
+                        </View>
                         {
-                            profileId == null
-                                ? <TouchableOpacity style={styles.updateButton}>
-                                    <Text
-                                        style={styles.inputs2}
-                                        onPress={handleSubmit(createNewProfile)}>
-                                        Create</Text>
+                            photo === "null" || photo === ""
+                                ?
+
+                                <TouchableOpacity style={styles.profileImageButton} onLongPress={_pickImage}>
+
+                                    <Image
+                                        style={styles.profileImage}
+                                        source={require('../profileIcon.png')}
+                                        resizeMode="contain"
+                                    >
+                                    </Image>
+
                                 </TouchableOpacity>
-                                : <TouchableOpacity style={styles.updateButton}>
-                                    <Text
-                                        style={styles.inputs2}
-                                        onPress={handleSubmit(updateProfile)}>Update</Text>
-                                </TouchableOpacity>
+                                :
+                                <TouchableOpacity style={styles.profileImageButton} onLongPress={_pickImage}>
+
+                                    <Image source={{ uri: photo }} style={{height: "100%", minWidth: "100%"}} resizeMode="contain" />
+
+                                 </TouchableOpacity>
+
+
                         }
 
                     </View>
+                    <View style={styles.bottomDiv}>
+                        <View style={styles.rightBottomDiv}>
+                            <Text style={styles.text}>First Name</Text>
+                            <TextInput
+                                editable style={styles.inputs}
+                                placeholder={firstName}
+                                onChangeText={text => {
+                                    setValue('first_name', text)
+                                }}>
+                                {firstName}
+                            </TextInput>
+                            <Text style={styles.text}>Last Name</Text>
+                            <TextInput
+                                editable style={styles.inputs}
+                                placeholder={lastName}
+                                onChangeText={text => {
+                                    setValue('last_name', text)
+                                }}>{lastName}</TextInput>
+                            <Text style={styles.text}>Email</Text>
+                            <TextInput
+                                editable style={styles.inputs}
+                                placeholder={email}
+                                onChangeText={text => {
+                                    setValue('email', text)
+                                }}> {email}</TextInput>
+                            <Text style={styles.text}>Town/City</Text>
+                            <TextInput
+                                editable style={styles.inputs}
+                                placeholder="Colorado Springs"
+                                onChangeText={text => {
+                                    setValue('city', text)
+                                }}>{city ? city : ""}</TextInput>
+                            <Text style={styles.text}>Country</Text>
+                            <TextInput
+                                editable style={styles.inputs}
+                                placeholder="United States"
+                                onChangeText={text => {
+                                    setValue('country', text)
+                                }}>{country ? country : ""}</TextInput>
+                            <Text style={styles.text}>Age</Text>
+                            <TextInput
+                                editable style={styles.inputs}
+                                placeholder="25"
+                                onChangeText={text => {
+                                    setValue('age', text)
+                                }}>{age ? age : ""}</TextInput>
+                            <Text style={styles.text}>Gender</Text>
+                            <TextInput
+                                editable style={styles.inputs}
+                                placeholder="M/F"
+                                onChangeText={text => {
+                                    setValue('gender', text)
+                                }}>{gender ? "F/M" : gender}</TextInput>
+                            <Text style={styles.text}>Bio</Text>
+                            <TextInput
+                                editable style={styles.bio}
+                                placeholder="Write something about yourself!"
+                                onChangeText={text => {
+                                    setValue('bio', text)
+                                }}>{bio ? bio : ""}</TextInput>
+                            {
+                                profileId == null
+                                    ? <TouchableOpacity style={styles.updateButton}>
+                                        <Text
+                                            style={styles.inputs2}
+                                            onPress={handleSubmit(createNewProfile)}>
+                                            Create</Text>
+                                    </TouchableOpacity>
+                                    : <TouchableOpacity style={styles.updateButton}>
+                                        <Text
+                                            style={styles.inputs2}
+                                            onPress={handleSubmit(updateProfile)}>Update</Text>
+                                    </TouchableOpacity>
+                            }
+
+                        </View>
+                    </View>
                 </View>
-            </View>
             </ScrollView>
         </ImageBackground>
     );
@@ -215,7 +250,6 @@ const styles = StyleSheet.create({
         width: "100%",
         maxHeight: "15%",
         backgroundColor: "white",
-        justifyContent: "space-between",
         padding: "1%",
         marginTop: "5%"
     },
@@ -228,7 +262,7 @@ const styles = StyleSheet.create({
         marginTop: '-5%'
     },
     headerText: {
-        width: "65%",
+        width: "50%",
         justifyContent: "center",
         alignItems: "center"
     },
@@ -237,16 +271,23 @@ const styles = StyleSheet.create({
         width: "100%",
     },
     backButton: {
-        minWidth: "20%",
+        minWidth: "22%",
         height: "100%",
+        marginLeft: "2%"
     },
     headerTextStyle2: {
         fontSize: 20,
         fontWeight: "bold"
     },
+    profileImageButton: {
+        width: "50%",
+        height: "99%",
+        justifyContent: "center",
+        marginTop: "2%"
+    },
     profileImage: {
-        width: "15%",
-        height: "99%"
+        maxWidth: "100%",
+        height: "90%",
     },
     background: {
         width: '100%',
