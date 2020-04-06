@@ -176,15 +176,10 @@ const MainPage = () => {
 }
 
 const LogOut = ({ navigation }) => {
+  navigation.navigate('Landing')
 
-  React.useEffect(() => {
-    navigation.navigate('HomeLoaded',
-      {
-        screen: 'Landing'
-      })
-  }, [])
   return (
-    <View></View>
+    <></>
   )
 }
 
