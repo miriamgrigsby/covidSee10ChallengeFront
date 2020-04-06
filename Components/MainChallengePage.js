@@ -51,10 +51,6 @@ const MainChallengePage = ({ navigation }) => {
         } else didMountRef.current = true
     }, [])
 
-    // const challengeCard = challenges.map(challenge => {
-    //     return <ChallengeInstance navigation={navigation} title={challenge.title} daily={challenge.daily} id={challenge.id} key={challenge.id} points={challenge.points} reps={challenge.reps} sport={challenge.sport} workoutType={challenge.workout_type} />
-    // })
-
     const filterChallenges = () => 
     challenges
         .filter(challenge => {
@@ -94,7 +90,7 @@ const MainChallengePage = ({ navigation }) => {
                             <Text style={styles.dailyChallengeText}>DAILY CHALLENGE</Text>
                         </TouchableOpacity>
                         <View style={styles.filter}>
-                            <TextInput style={styles.filterInput} onChangeText={handleChange} placeholder="climbing or pushup">
+                            <TextInput style={styles.filterInput} onChangeText={handleChange} placeholder="Filter by type/sport">
 
                             </TextInput>
                             <TouchableOpacity style={styles.filterButton} onPress={() => alert("Filter by the Workout Type or Sport to Narrow down the challenges")}>

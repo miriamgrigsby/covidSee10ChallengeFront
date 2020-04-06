@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { StyleSheet, Text, View, Image, AsyncStorage } from 'react-native';
-import { TouchableOpacity, FlatList, ScrollView } from 'react-native-gesture-handler';
+import { TouchableOpacity, FlatList, ScrollView, TextInput } from 'react-native-gesture-handler';
 import axios from 'axios'
 import Constants from 'expo-constants';
 import YourChallenges from './YourChallenges'
@@ -8,6 +8,7 @@ import YourChallenges from './YourChallenges'
 const Friends = ({ navigation }) => {
 
     const [friends, setFriends] = React.useState([])
+    const [search, setSearch] = React.useState("")
 
     useEffect(() => {
         axios.get('https://covid-see10.herokuapp.com/api/userprofiles/')
@@ -19,9 +20,22 @@ const Friends = ({ navigation }) => {
 
     const getItemsFromStorage = async () => {
         await AsyncStorage.multiGet(['everyUsersChallenges', 'allChallenges'], (err, stores) => {
-            console.log(stores)
+            // console.log(stores)
         })
     }
+
+    const filterPeople = () => 
+    
+    friends
+        .filter(friend => {
+            return friend.first_name.toLowerCase().includes(search.toLowerCase()) 
+        })
+
+    const handleChange = async (text) => {
+        setSearch(text)
+        filterPeople()
+    }
+
 
     function Item({ data }) {
         return (
@@ -90,10 +104,16 @@ const Friends = ({ navigation }) => {
                     >
                     </Image>
                 </TouchableOpacity >
+                <View style={styles.filter}>
+                            <TextInput style={styles.filterInput} onChangeText={handleChange} placeholder="Filter by First Name">
+
+                            </TextInput>
+                        </View>
             </View>
             <View style={styles.container}>
+                
                 <FlatList
-                    data={friends}
+                    data={filterPeople()}
                     renderItem={({ item }) => <Item data={item} />}
                     keyExtractor={item => item.id}
                     contentContainerStyle={{ paddingBottom: 20 }}
@@ -107,6 +127,30 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         marginTop: Constants.statusBarHeight,
+    },
+    filterButton: {
+        // backgroundColor: "red",
+        minWidth: "12%",
+        minHeight: 50,
+        justifyContent: "center"
+    },
+    filterInput: {
+        width: "100%",
+        height: 60,
+        borderWidth: 2,
+        fontSize: 20,
+        textAlign: "center",
+        borderColor: "red",
+        backgroundColor: "white"
+    },
+    
+    filter: {
+        maxWidth: "70%",
+        justifyContent: "space-evenly",
+        alignItems: "center",
+        minHeight: 75,
+        flex: 1,
+        flexDirection: "row",
     },
     rightBottom: {
         maxWidth: "55%",
@@ -214,15 +258,18 @@ const styles = StyleSheet.create({
     },
 
     headerDiv: {
-        height: "20%",
-        justifyContent: "center",
+        height: 150,
+        alignItems: "center",
         backgroundColor: "black",
-        marginBottom: "-6%"
+        marginBottom: "-6%",
+        flexDirection: "row",
+        minWidth: "100%",
+        marginTop: "5%",
+        justifyContent:"space-around"
     },
     backButton: {
-        maxHeight: "100%",
-        width: "30%",
-        marginLeft: "2%",
+        // minHeight: 300,
+        minWidth: 120,
         justifyContent: "center"
     },
     covidIcon: {
