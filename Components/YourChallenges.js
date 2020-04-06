@@ -115,9 +115,7 @@ class YourChallenges extends Component {
         const challengeId = id
         const userChallengeIdObject = this.state.allUserChallenges.find(id => id.challenge == challengeId)
         await AsyncStorage.setItem('userChallengeId', JSON.stringify(userChallengeIdObject.id))
-        this.props.navigation.navigate('HomeLoaded', {
-                screen: "MyModal"
-            })
+        this.props.navigation.navigate('MyModal')
     }
 
     render() {
