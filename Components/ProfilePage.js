@@ -107,7 +107,7 @@ const ProfilePage = ({ navigation }) => {
     return (
         <ImageBackground
             style={styles.background}
-            source={require("../mainPageBackground.jpg")}
+            source={require("../images/mainPageBackground.jpg")}
         >
             <ScrollView>
                 <View style={styles.container} >
@@ -118,7 +118,7 @@ const ProfilePage = ({ navigation }) => {
                         >
                             <Image
                                 style={styles.covidIcon}
-                                source={require('../covidIcon.png')}
+                                source={require('../images/covidIcon.png')}
                                 resizeMode="cover"
                             >
                             </Image>
@@ -134,7 +134,7 @@ const ProfilePage = ({ navigation }) => {
 
                                     <Image
                                         style={styles.profileImage}
-                                        source={require('../profileIcon.png')}
+                                        source={require('../images/profileIcon.png')}
                                         resizeMode="contain"
                                     >
                                     </Image>

@@ -43,7 +43,7 @@ const Friends = ({ navigation }) => {
                 <View style={styles.leftDiv}>
                     <View style={styles.imageContainer}>
                         <Image style={styles.plusIcon}
-                            source={require('../profileIcon.png')}
+                            source={require('../images/profileIcon.png')}
                             resizeMode="contain"
                         >
                         </Image>
@@ -99,7 +99,7 @@ const Friends = ({ navigation }) => {
                     onPress={() => navigation.toggleDrawer()}
                 >
                     <Image style={styles.covidIcon}
-                        source={require('../covidIcon.png')}
+                        source={require('../images/covidIcon.png')}
                         resizeMode="cover"
                     >
                     </Image>

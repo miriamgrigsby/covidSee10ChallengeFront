@@ -41,7 +41,7 @@ const SignUp = (props) => {
     return (
         <ImageBackground
             style={styles.background}
-            source={require("../homeBackgroundd.jpg")}
+            source={require("../images/homeBackgroundd.jpg")}
 
         >
             <View style={styles.container}>

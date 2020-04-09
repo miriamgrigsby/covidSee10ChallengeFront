@@ -10,7 +10,7 @@ class LandingPage extends Component {
         return (
             <ImageBackground
                 style={styles.background}
-                source={require("../landingBackground.png")}
+                source={require("../images/landingBackground.png")}
             >
                 <View style={styles.container}>
                     <TouchableOpacity

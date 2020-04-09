@@ -8,7 +8,7 @@ const VideosTab = ({navigation}) => {
             <Text>This Is Where you'll upload and see all your videos</Text>
             <TouchableOpacity style={styles.backButton} onPress={() => navigation.toggleDrawer()}>
                 <Image style={styles.covidIcon}
-                    source={require('../covidIcon.png')}
+                    source={require('../images/covidIcon.png')}
                     resizeMode="cover"
                 >
                 </Image>

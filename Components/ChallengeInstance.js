@@ -52,7 +52,7 @@ const ChallengeInstance = ({ points, reps, sport, workoutType, title, id }) => {
                             value={id} onPress={addChallenge}>
                             <Image
                                 style={styles.plusIcon}
-                                source={require('../plusIcon.png')}
+                                source={require('../images/plusIcon.png')}
                             >
                             </Image>
                         </TouchableOpacity>
@@ -61,7 +61,7 @@ const ChallengeInstance = ({ points, reps, sport, workoutType, title, id }) => {
                             value={id} onPress={addChallenge}>
                             <Image
                                 style={styles.plusIcon}
-                                source={require('../shareIcon.png')}
+                                source={require('../images/shareIcon.png')}
                             >
                             </Image>
                         </TouchableOpacity>

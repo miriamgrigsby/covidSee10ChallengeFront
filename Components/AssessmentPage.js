@@ -12,7 +12,7 @@ const AssessmentPage = ({ navigation }) => {
                     onPress={() => navigation.toggleDrawer()}>
                     <Image
                         style={styles.covidImage}
-                        source={require('../covidIcon.png')}
+                        source={require('../images/covidIcon.png')}
                         resizeMode="cover"
                     >
                     </Image>

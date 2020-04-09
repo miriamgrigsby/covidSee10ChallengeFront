@@ -60,7 +60,7 @@ const Home = (props) => {
     return (
         <ImageBackground
             style={styles.background}
-            source={require("../homeBackgroundd.jpg")}
+            source={require("../images/homeBackgroundd.jpg")}
 
         >
             <ScrollView style={styles.container} contentContainerStyle={{

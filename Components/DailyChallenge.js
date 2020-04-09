@@ -41,12 +41,12 @@ const DailyChallenge = ({ navigation }) => {
             <View style={styles.headerDiv}>
                 <ImageBackground
                     style={styles.background}
-                    source={require("../mainPageBackground.jpg")}>
+                    source={require("../images/mainPageBackground.jpg")}>
                     <TouchableOpacity style={styles.backButton}
                         onPress={() => navigation.toggleDrawer()}
                     >
                         <Image style={styles.covidIcon}
-                            source={require('../covidIcon.png')}
+                            source={require('../images/covidIcon.png')}
                             resizeMode="cover"
                         >
                         </Image>
@@ -70,7 +70,7 @@ const DailyChallenge = ({ navigation }) => {
                                 onPress={addChallenge}
                             >
                                 <Image style={styles.plusIcon}
-                                    source={require('../plusIcon.png')}
+                                    source={require('../images/plusIcon.png')}
                                     resizeMode="cover"
                                 >
                                 </Image>
@@ -80,7 +80,7 @@ const DailyChallenge = ({ navigation }) => {
                     <TouchableOpacity style={styles.shareButton}
                     >
                         <Image style={styles.shareIcon}
-                            source={require('../shareIcon.png')}
+                            source={require('../images/shareIcon.png')}
                             resizeMode="cover"
                         >
                         </Image>
@@ -90,7 +90,7 @@ const DailyChallenge = ({ navigation }) => {
             <View style={styles.footer}>
                 <ImageBackground
                     style={styles.background}
-                    source={require("../mainPageBackground.jpg")}>
+                    source={require("../images/mainPageBackground.jpg")}>
                 </ImageBackground>
             </View>
         </View>

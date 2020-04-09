@@ -69,7 +69,7 @@ const MainChallengePage = ({ navigation }) => {
     >
         <ImageBackground
             style={styles.background}
-            source={require("../mainBackground.png")}
+            source={require("../images/mainBackground.png")}
         >
             <ScrollView contentContainerStyle={{paddingBottom: 20}}>
                 <View style={styles.container} >
@@ -79,7 +79,7 @@ const MainChallengePage = ({ navigation }) => {
                             onPress={() => navigation.toggleDrawer()}
                         >
                             <Image style={styles.hamburgerImage}
-                                source={require('../hamburger.png')}
+                                source={require('../images/hamburger.png')}
                                 resizeMode="cover"
                             >
                             </Image>
@@ -95,7 +95,7 @@ const MainChallengePage = ({ navigation }) => {
                             </TextInput>
                             <TouchableOpacity style={styles.filterButton} onPress={() => alert("Filter by the Workout Type or Sport to Narrow down the challenges")}>
                                 <Image style={styles.filterImage}
-                                    source={require('../filterIcon.png')}
+                                    source={require('../images/filterIcon.png')}
                                     resizeMode="cover"
                                 >
                                 </Image>

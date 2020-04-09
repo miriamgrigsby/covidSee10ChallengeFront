@@ -18,6 +18,7 @@ import Ranking from './Ranking';
 
 import DailyChallenge from './DailyChallenge';
 import MainChallengePage from './MainChallengePage'
+import LandingPage from './LandingPage';
 
 const Drawer = createDrawerNavigator();
 
@@ -45,7 +46,7 @@ const MainPage = () => {
           options={{
             drawerIcon: ({ tintColor }) => (
               <Image
-                source={require("../whiteCovidIcon.png")}
+                source={require("../images/whiteCovidIcon.png")}
                 resizeMode="cover"
                 style={{ width: 35, height: 40, tintColor: tintColor }}
               />)
@@ -57,7 +58,7 @@ const MainPage = () => {
           options={{
             drawerIcon: ({ tintColor }) => (
               <Image
-                source={require("../fireIcon.png")}
+                source={require("../images/fireIcon.png")}
                 resizeMode="cover"
                 style={{ width: 35, height: 38, tintColor: tintColor }}
               />)
@@ -68,7 +69,7 @@ const MainPage = () => {
           options={{
             drawerIcon: ({ tintColor }) => (
               <Image
-                source={require("../assessmentIcon.png")}
+                source={require("../images/assessmentIcon.png")}
                 resizeMode="cover"
                 style={{ width: 35, height: 30, tintColor: tintColor }}
               />)
@@ -79,7 +80,7 @@ const MainPage = () => {
           options={{
             drawerIcon: ({ tintColor }) => (
               <Image
-                source={require("../newChallengeIcon.png")}
+                source={require("../images/newChallengeIcon.png")}
                 resizeMode="cover"
                 style={{ width: 35, height: 35, tintColor: tintColor }}
               />)
@@ -89,7 +90,7 @@ const MainPage = () => {
           component={YourChallenges} options={{
             drawerIcon: ({ tintColor }) => (
               <Image
-                source={require("../yourChallengeIcon.png")}
+                source={require("../images/yourChallengeIcon.png")}
                 resizeMode="cover"
                 style={{ width: 35, height: 35, tintColor: tintColor }}
               />)
@@ -100,7 +101,7 @@ const MainPage = () => {
           options={{
             drawerIcon: ({ tintColor }) => (
               <Image
-                source={require("../videoIcon.png")}
+                source={require("../images/videoIcon.png")}
                 resizeMode="cover"
                 style={{ width: 35, height: 40, tintColor: tintColor }}
               />)
@@ -111,7 +112,7 @@ const MainPage = () => {
           options={{
             drawerIcon: ({ tintColor }) => (
               <Image
-                source={require("../friendsIcon.png")}
+                source={require("../images/friendsIcon.png")}
                 resizeMode="cover"
                 style={{ width: 35, height: 35, tintColor: tintColor }}
               />)
@@ -128,7 +129,7 @@ const MainPage = () => {
         options={{
           drawerIcon: ({ tintColor }) => (
             <Image
-              source={require("../logbookIcon.png")}
+              source={require("../images/logbookIcon.png")}
               resizeMode="cover"
               style={{ width: 34, height: 32, tintColor: tintColor }}
             />)
@@ -139,7 +140,7 @@ const MainPage = () => {
         options={{
           drawerIcon: ({ tintColor }) => (
             <Image
-              source={require("../rankingIcon.png")}
+              source={require("../images/rankingIcon.png")}
               resizeMode="cover"
               style={{ width: 35, height: 40, tintColor: tintColor }}
             />)
@@ -154,18 +155,18 @@ const MainPage = () => {
         options={{
           drawerIcon: ({ tintColor }) => (
             <Image
-              source={require("../profileIcon.png")}
+              source={require("../images/profileIcon.png")}
               resizeMode="cover"
               style={{ width: 35, height: 35, tintColor: tintColor }}
             />)
         }} />
       <Drawer.Screen
         name="Logout"
-        component={LogOut}
+        component={LandingPage}
         options={{
           drawerIcon: ({ tintColor }) => (
             <Image
-              source={require("../logoutIcon.png")}
+              source={require("../images/logoutIcon.png")}
               resizeMode="cover"
               style={{ width: 35, height: 32, tintColor: tintColor }}
             />)
@@ -189,7 +190,7 @@ function CustomDrawerContent(props) {
   return (
     <DrawerContentScrollView  >
       <View style={{ flex: 80, width: 100, minHeight: 100, alignSelf: "center", marginTop: "-2%" }}>
-        <Image style={{ width: "100%", height: "100%", }} source={require('../covidIcon.png')} />
+        <Image style={{ width: "100%", height: "100%", }} source={require('../images/covidIcon.png')} />
       </View>
       <DrawerItem
         label={() => <View style={{ borderBottomWidth: 1, minWidth: 215, alignItems: "center", borderColor: "white" }}><Text style={{ fontSize: 20, color: "white" }}>Covid-See10</Text></View>}

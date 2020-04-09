@@ -10,7 +10,7 @@ const Ranking = ({ navigation }) => {
                 style={styles.backButton}
                 onPress={() => navigation.toggleDrawer()}>
                 <Image style={styles.covidIcon}
-                    source={require('../covidIcon.png')}
+                    source={require('../images/covidIcon.png')}
                     resizeMode="cover"
                 >
                 </Image>
